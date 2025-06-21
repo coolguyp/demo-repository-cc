@@ -2,11 +2,11 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_NAME: yourdockerhubusername/yourimagename
+    IMAGE_NAME: pranam2835/sample-python-flask-app
     TAG: latest
   secrets-manager:
-    DOCKERHUB_USERNAME: dockerhub-creds:username
-    DOCKERHUB_PASSWORD: dockerhub-creds:password
+    DOCKERHUB_USERNAME: dockerhub-build:username
+    DOCKERHUB_PASSWORD: dockerhub-build:password
 
 phases:
   pre_build:
