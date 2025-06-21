@@ -1,0 +1,29 @@
+version: 0.2
+
+env:
+  secrets-manager:
+    DOCKER_REGISTRY_USERNAME: dockerHubCreds:username
+    DOCKER_REGISTRY_PASSWORD: dockerHubCreds:password
+  variables:
+    IMAGE_NAME: "my-sample-app"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Docker Hub...
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
+
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t $IMAGE_NAME .
+
+  post_build:
+    commands:
+      - echo Tagging and pushing image...
+      - docker tag $IMAGE_NAME $DOCKER_REGISTRY_USERNAME/$IMAGE_NAME:latest
+      - docker push $DOCKER_REGISTRY_USERNAME/$IMAGE_NAME:latest
+
+artifacts:
+  files:
+    - '**/*'
