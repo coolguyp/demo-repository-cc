@@ -16,7 +16,8 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t $IMAGE_NAME:$TAG .
+      - docker build -t $IMAGE_NAME:$TAG ./app
+
   post_build:
     commands:
       - echo Pushing the Docker image...
