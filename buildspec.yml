@@ -2,25 +2,29 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_NAME: pranam2835/sample-python-flask-app
-    TAG: latest
+    IMAGE_NAME: "sample-python-flask-app"
   secrets-manager:
-    DOCKERHUB_USERNAME: dockerhub-build:username
-    DOCKERHUB_PASSWORD: dockerhub-build:password
+    DOCKER_REGISTRY_USERNAME: dockerhub-build:username
+    DOCKER_REGISTRY_PASSWORD: dockerhub-build:password
 
 phases:
   pre_build:
     commands:
-      - echo Logging in to Docker Hub...
-      - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - echo "Logging in to Docker Hub..."
+      - echo "Using USERNAME: $DOCKER_REGISTRY_USERNAME"
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
 
   build:
     commands:
-      - echo Building the Docker image...
-      - docker build -t $IMAGE_NAME:$TAG ./day-14/sample-python-app
+      - echo "Building the Docker image..."
+      - docker build -t $IMAGE_NAME .
 
   post_build:
     commands:
-      - echo Pushing the Docker image...
-      - docker push $IMAGE_NAME:$TAG
-      - echo Done.
+      - echo "Tagging and pushing image..."
+      - docker tag $IMAGE_NAME pranam2835/sample-python-flask-app:latest
+      - docker push pranam2835/sample-python-flask-app:latest
+
+artifacts:
+  files:
+    - '**/*'
