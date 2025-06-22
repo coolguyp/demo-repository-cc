@@ -4,14 +4,13 @@ env:
   variables:
     IMAGE_NAME: "sample-python-flask-app"
   secrets-manager:
-    DOCKER_REGISTRY_USERNAME: dockerhub-build:username
-    DOCKER_REGISTRY_PASSWORD: dockerhub-build:password
+    DOCKER_REGISTRY_USERNAME: dockerhub-build:DOCKER_REGISTRY_USERNAME
+    DOCKER_REGISTRY_PASSWORD: dockerhub-build:DOCKER_REGISTRY_PASSWORD
 
 phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
-      - echo "Using USERNAME: $DOCKER_REGISTRY_USERNAME"
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
 
   build:
