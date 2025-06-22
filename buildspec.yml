@@ -4,8 +4,8 @@ env:
   variables:
     IMAGE_NAME: "sample-python-flask-app"
   secrets-manager:
-    DOCKER_REGISTRY_USERNAME: my-dockerhub-build:username
-    DOCKER_REGISTRY_PASSWORD: my-dockerhub-build:password
+    DOCKER_REGISTRY_USERNAME: demo-project-final:username
+    DOCKER_REGISTRY_PASSWORD: demo-project-final:password
 
 phases:
   pre_build:
