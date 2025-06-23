@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
 
-# Stop the running container (if any)
-echo "Hi"
+echo "Stopping existing container if it exists..."
+docker stop flask-container || true
+docker rm flask-container || true
