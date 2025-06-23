@@ -2,7 +2,7 @@
 set -e
 
 echo "Pulling Docker image..."
-docker pull pranam2835/sample-python-flask-app
+docker pull pranam2835/sample-python-flask-app   
 
 echo "Stopping existing containers (if any)..."
 docker stop $(docker ps -aq) || true
