@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
 
-# Stop the running container (if any)
-echo "Hi"
+# Stop and remove existing container if running
+docker stop sample-python-flask-app || true
+docker rm sample-python-flask-app || true
