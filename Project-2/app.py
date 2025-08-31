@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template
 import string, random, json, os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 DATA_FILE = 'data.json'
 
 def load_data():
